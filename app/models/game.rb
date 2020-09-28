@@ -4,6 +4,8 @@ class Game < ActiveRecord::Base
     belongs_to :player 
 
     # attr_accessor :status, :incorrect_guesses
+    def start_game
+    end
 
 end
 
