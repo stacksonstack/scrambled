@@ -16,6 +16,8 @@ GEM
     concurrent-ruby (1.1.7)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    figaro (1.2.0)
+      thor (>= 0.14.0, < 2)
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
@@ -29,6 +31,8 @@ GEM
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     netrc (0.11.0)
+    pastel (0.8.0)
+      tty-color (~> 0.5)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -36,6 +40,7 @@ GEM
     rack-protection (2.1.0)
       rack
     rake (13.0.1)
+    random-word (1.3.0)
     require_all (3.0.0)
     rest-client (2.1.0)
       http-accept (>= 1.7.0, < 2.0)
@@ -52,13 +57,25 @@ GEM
       activerecord (>= 4.1)
       sinatra (>= 1.0)
     sqlite3 (1.4.2)
+    thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
+    tty-color (0.5.2)
+    tty-cursor (0.7.1)
+    tty-prompt (0.22.0)
+      pastel (~> 0.8)
+      tty-reader (~> 0.8)
+    tty-reader (0.8.0)
+      tty-cursor (~> 0.7)
+      tty-screen (~> 0.8)
+      wisper (~> 2.0)
+    tty-screen (0.8.1)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.7)
+    wisper (2.0.1)
     zeitwerk (2.4.0)
 
 PLATFORMS
@@ -66,12 +83,15 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  figaro
   pry
   rake
+  random-word (~> 1.3)
   require_all
   rest-client
   sinatra-activerecord
   sqlite3
+  tty-prompt
 
 BUNDLED WITH
    2.1.4
