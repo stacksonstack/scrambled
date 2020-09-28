@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_09_28_200255) do
   create_table "words", force: :cascade do |t|
     t.string "word"
     t.string "difficulty"
-    t.string "type"
+    t.string "word_type"
     t.string "definition"
   end
 
