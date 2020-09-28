@@ -4,3 +4,6 @@ class Word < ActiveRecord::Base
     has_many :players , through: :games 
     
 end
+
+# Word class
+# Attrs: difficulty, hint (cond on difficulty; either word type or definition)
