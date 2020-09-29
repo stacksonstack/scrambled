@@ -8,7 +8,7 @@ class Player < ActiveRecord::Base
 
     def history
         self.games.all.each do |game|
-            puts "word: #{game.word.word} - scramble: #{game.word.scramble_word} - outcome: #{game.status}"
+            puts "-word: #{game.word.word} - scramble: #{game.word.scramble_word} - outcome: #{game.status}"
         end
     end
 

@@ -7,12 +7,13 @@ class Game < ActiveRecord::Base
     end
 
     def game_lost
-        self.status = "lost"
+        # self.status = "lost"
+        self.update_attribute(:status, "lost")
     end
 
     def game_won
-        self.status = "won"
+        # self.status = "won"
+        self.update_attribute(:status, "won")
     end
-
 
 end

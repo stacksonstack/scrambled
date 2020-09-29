@@ -2,11 +2,23 @@ require 'rest-client'
 require 'json'
 require 'pry'
 require 'tty-prompt'
+require 'artii'
+require 'colorize'
 
 class CLI 
 
+    def start_app
+        welcome_animation
+        welcome_menu
+    end
+
     def welcome_menu
-        puts "Welcome to Scrambled!"
+        # puts "Welcome to Scrambled!"
+        system "clear"
+        a = Artii::Base.new
+        puts a.asciify("SCRAMBLED!").colorize(:cyan)
+        a = Artii::Base.new :font => 'thin'
+        puts a.asciify("Main Menu").colorize(:cyan)
         prompt = TTY::Prompt.new
         selection = prompt.select("Choose an option", ["Login", "Create Account", "Display Instructions"])
         if selection == "Create Account"
@@ -96,6 +108,7 @@ class CLI
         if game.word.word == guess
             puts "Congrats! You guessed correctly!"
             game.game_won
+            binding.pry
             login_menu(game.player)
         end
     end

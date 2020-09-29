@@ -5,4 +5,4 @@ require_relative '../config/environment'
 
 cli = CLI.new
 
-cli.welcome_menu
+cli.start_app
