@@ -8,10 +8,11 @@ Player.destroy_all
 Game.destroy_all
 Word.destroy_all
 
-easy_words = ["nail", "horn", "hate", "wife", "hair"]
-hard_words = ["variable", "contempt", "missile", "casualty", "bishop"]
+# word instances - API call method
+# easy_words = ["nail", "horn", "hate", "wife", "hair"]
+# hard_words = ["variable", "contempt", "missile", "casualty", "bishop"]
 
-word_hash = {}
+# word_hash = {}
  
 # easy_words.each do |word|
 #     url = "https://api.dictionaryapi.dev/api/v2/entries/en/#{word}"
@@ -27,7 +28,6 @@ word_hash = {}
 #     word_hash[word] = data
 # end
 
-# #word instances
 # nail = Word.create({word: "nail", difficulty: "Easy", word_type: word_hash["nail"][0]["meanings"][0]["partOfSpeech"], definition: word_hash["nail"][0]["meanings"][0]["definitions"][0]["definition"] })
 # horn = Word.create({word: "horn", difficulty: "Easy", word_type: word_hash["horn"][0]["meanings"][0]["partOfSpeech"], definition: word_hash["horn"][0]["meanings"][0]["definitions"][0]["definition"] })
 # hate = Word.create({word: "hate", difficulty: "Easy", word_type: word_hash["hate"][0]["meanings"][0]["partOfSpeech"], definition: word_hash["hate"][0]["meanings"][0]["definitions"][0]["definition"] })
@@ -40,26 +40,31 @@ word_hash = {}
 # casualty = Word.create({word: "casualty", difficulty: "Hard", word_type: word_hash["casualty"][0]["meanings"][0]["partOfSpeech"], definition: word_hash["casualty"][0]["meanings"][0]["definitions"][0]["definition"] })
 # bishop = Word.create({word: "bishop", difficulty: "Hard", word_type: word_hash["bishop"][0]["meanings"][0]["partOfSpeech"], definition: word_hash["bishop"][0]["meanings"][0]["definitions"][0]["definition"] })
 
+#word instances - manual method
+nail = Word.create({word: "nail", difficulty: "Easy", word_type: "noun", definition: "a slender, typically rod-shaped rigid piece of metal" })
+horn = Word.create({word: "horn", difficulty: "Easy", word_type: "noun", definition: "a wind instrument, usually made of brass or other metal or plastic"})
+hate = Word.create({word: "hate", difficulty: "Easy", word_type: "verb", definition: "to dislike intensely or passionately"})
+wife = Word.create({word: "wife", difficulty: "Easy", word_type: "noun", definition: "a married woman"})
+hair = Word.create({word: "hair", difficulty: "Easy", word_type: "noun", definition: "any of the numerous fine, usually cylindrical, keratinous filaments growing from the skin of humans and animals"})
+
+variable = Word.create({word: "variable", difficulty: "Hard", word_type: "adjective", definition: "apt or liable to vary or change"})
+contempt = Word.create({word: "contempt", difficulty: "Hard", word_type: "noun", definition: "the state of being despised"})
+missile = Word.create({word: "missile", difficulty: "Hard", word_type: "noun", definition: "an object or weapon for throwing, hurling, or shooting, as a stone, bullet, or arrow"})
+casualty = Word.create({word: "casualty", difficulty: "Hard", word_type: "noun", definition: "one who is injured or killed in an accident" })
+bishop = Word.create({word: "bishop", difficulty: "Hard", word_type: "noun", definition: "a spiritual supervisor, overseer, or the like" })
+
 #player instances
 player_1 = Player.create({username: "player_1", password: "1234", email_address: "player_1@gmail.com"})
 player_2 = Player.create({username: "player_2", password: "1234", email_address: "player_2@gmail.com"})
 player_3 = Player.create({username: "player_3", password: "1234", email_address: "player_3@gmail.com"})
 
 # #game instances
-# game_1 = Game.create({word: nail, player: player_1, status: "won", incorrect_guesses: 1})
-# game_2 = Game.create({word: bishop, player: player_1, status: "lost", incorrect_guesses: 1})
-# game_3 = Game.create({word: contempt, player: player_2, status: "won", incorrect_guesses: 1})
-# game_4 = Game.create({word: hair, player: player_1, status: "won", incorrect_guesses: 1})
-# game_5 = Game.create({word: wife, player: player_3, status: "won", incorrect_guesses: 1})
-# game_6 = Game.create({word: hate, player: player_3, status: "won", incorrect_guesses: 1})
-# game_7 = Game.create({word: bishop, player: player_3, status: "won", incorrect_guesses: 1})
-# game_8 = Game.create({word: variable, player: player_3, status: "won", incorrect_guesses: 1})
-
-#too many API calls tests:
-hair = Word.create({word: "hair", difficulty: "Easy", word_type: "test", definition: "test"})
-variable = Word.create({word: "variable", difficulty: "Hard", word_type: "test", definition: "test"})
+game_1 = Game.create({word: nail, player: player_1, status: "won", incorrect_guesses: 1})
+game_2 = Game.create({word: bishop, player: player_1, status: "lost", incorrect_guesses: 3})
+game_3 = Game.create({word: contempt, player: player_2, status: "won", incorrect_guesses: 2})
+game_4 = Game.create({word: hair, player: player_1, status: "won", incorrect_guesses: 0})
+game_5 = Game.create({word: wife, player: player_3, status: "won", incorrect_guesses: 0})
+game_6 = Game.create({word: hate, player: player_3, status: "won", incorrect_guesses: 1})
+game_7 = Game.create({word: bishop, player: player_3, status: "won", incorrect_guesses: 2})
 game_8 = Game.create({word: variable, player: player_3, status: "won", incorrect_guesses: 1})
-game_4 = Game.create({word: hair, player: player_1, status: "won", incorrect_guesses: 1})
-hate = Word.create({word: "hair", difficulty: "Easy", word_type: "test", definition: "test"})
-wife = Word.create({word: "wife", difficulty: "Easy", word_type: "test", definition: "test"})
 

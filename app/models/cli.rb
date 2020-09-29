@@ -19,6 +19,7 @@ class CLI
     end
 
     def login
+        system "clear"
         un_prompt = TTY::Prompt.new
         username = un_prompt.ask("Enter your username: ")
         if !Player.all.map{|player| player.username}.include?(username)
