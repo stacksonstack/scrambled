@@ -1,5 +1,5 @@
-require 'rest-client' # actually let you hit the endpoint 
-require 'json' # parse the response body into a form you can use 
+require 'rest-client'
+require 'json'
 require 'pry'
 require 'random-word'
 require_relative '../config/environment'
