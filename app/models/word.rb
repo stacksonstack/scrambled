@@ -4,10 +4,10 @@ class Word < ActiveRecord::Base
     has_many :players , through: :games 
 
     def hint
-        if word.difficulty == "Easy"
-            self.word_type
+        if self.difficulty == "Easy"
+            "Part of speech is: #{self.word_type}"
         else
-            self.definition
+            "Definition: #{self.definition}"
         end
     end
 
@@ -18,6 +18,14 @@ class Word < ActiveRecord::Base
             scramble = self.word[0] + scramble
         end 
         return scramble
+    end
+
+    def self.easy_words
+        self.all.find_all{|word| word.difficulty == "Easy"}
+    end
+
+    def self.hard_words
+        self.all.find_all{|word| word.difficulty == "Hard"}
     end
     
 end
