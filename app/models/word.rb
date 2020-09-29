@@ -10,6 +10,15 @@ class Word < ActiveRecord::Base
             self.definition
         end
     end
+
+    def scramble_word
+        scramble = self.word
+        until scramble != self.word 
+            scramble = self.word[1..self.word.length-1].split("").shuffle.join
+            scramble = self.word[0] + scramble
+        end 
+        return scramble
+    end
     
 end
 

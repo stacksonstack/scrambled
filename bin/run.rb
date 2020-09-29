@@ -5,9 +5,12 @@ require_relative '../config/environment'
 
 cli = CLI.new
 
+cli.welcome_menu
 
 
-# binding.pry
+
+
+binding.pry
 
 
 # a = Artii::Base.new :font => 'slant'
