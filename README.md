@@ -1,41 +1,26 @@
-# APIs
-- some additional gems we'll need (RestClient & JSON)
-- what are CRUD actions and how do those relate to our requests? 
-  - a lot of this you'll see in Mod2 
-- Different types of APIs
-  - some you'll need an API key for 
-- Make some requests, talk about how we'll use them in our apps 
+# DESCRIPTION
+This command line game called Scrambled lets a user sign in/create an account then play a game where they will have to unscramble a word where only the first letter is in the correct order. Ex: user is prompted with "wrdo" and must guess "word".
 
+# CLASSES
+There are 3 primary classes for the game and one CLI class to run the game.
+  -Player: has many games; has many words, through game
+  -Game: belongs to player; belongs to word
+  -Word: has many games; has many players, through game
 
-## What is an API 
-- Our own DBs with Ruby, AR, and SQLite3
-- In order to request info from a DB, we go through the API and how it specifies how we make requests
-- FB or Google Auth (OAuth is clutch in Mod5)
+# NAVIGATION
+-Welcome Menu: user can create an account; user can log in; user can check game instructions
+-Login Menu: user can play a game; user can check leaderboard (top 10) stats; user can check game history; user can log out
+-Play Game Menu: user can pick difficulty (easy or hard), which starts the game
 
+# TOOLS (GEMS) USED
+-ActiveRecord: for persisting data
+-TTY: for prompting users to respond
+-artii: for displaying ascii art
+-figlet: fonts for ascii art
+-colorize: colors for ascii art
+-RestClient*: for making API requests to Google Dictionary API
+*implemented correctly, but demos are done with manually seeded data to prevent API call limits
 
-## CRUD Actions & HTTP Verbs
-Create -- POST 
-Read -- GET --- just look at the info  (MOST FREQUENTLY USED!!!)
-Update -- PATCH / PUT 
-Delete -- DELETE 
-
-- You'll do full CRUD on your DB and just use the API if helpful for seeding or searching 
-
-## How we use the APIs
-- Use the API to seed
-- Use it to search (and end up adding records to your own DB)
-
-### re: seeding
-- Which models are dependent on other ones? Seed those later. Create the instances that don't belong to anybody first 
-- Make sure you have all your API stuff ready to go (aka keys, testing hitting endpoints with RestClient)
-- Which endpoints do you need? Are they still active? 
-- What data are you expecting to get? How ya gonna use it? 
-
-
-# CLIs
-- CLI class to help us clean up our code 
-
-
-
-# Icebox
-- Copying today's lecture code to start your project (into new folder)
+# CREATORS
+-Stacey Carrillo
+-Billy Ott
