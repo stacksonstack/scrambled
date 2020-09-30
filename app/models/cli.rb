@@ -62,7 +62,7 @@ class CLI
         puts a.asciify("Welcome!").colorize(:cyan)
         puts "Logged in as: #{current_player.username} "
         prompt = TTY::Prompt.new
-        selection = prompt.select("\n\nChoose an option", ["Play Game","Check History","Leaderboard", "Log Out"] , help: "" )
+        selection = prompt.select("\n\nChoose an option", ["Play Game","Check History","Leaderboard","Account Information","Log Out"] , help: "" )
         if selection == "Play Game"
             system "clear"
             a = Artii::Base.new :font => 'slant'
@@ -96,6 +96,8 @@ class CLI
             if answer == "Go Back"
                 login_menu(current_player)
             end
+        elsif selection == "Account Information"
+            account_information(current_player)
         else
             log_out
         end
@@ -104,6 +106,58 @@ class CLI
     def log_out
         system "clear"
         welcome_menu
+    end
+
+    def account_information(current_player)
+        system "clear"
+        a = Artii::Base.new :font => 'slant'
+        puts a.asciify("Account Information").colorize(:cyan)
+        prompt = TTY::Prompt.new
+        answer = prompt.select("\n\nPlease select an option: ", ["Player Information","Update Information","Go Back"] , help: "" )
+        if answer == "Player Information"
+            player_information(current_player)
+        elsif answer == "Update Information"
+            update_account(current_player)
+        else
+            login_menu(current_player)
+        end
+    end
+
+    def player_information(current_player)
+        system "clear"
+        a = Artii::Base.new :font => 'slant'
+        puts a.asciify("Player Information").colorize(:cyan)
+        puts "\n\nUsername: #{current_player.username}"
+        puts "\n\nEmail Address: #{current_player.email_address}\n\n"
+        prompt = TTY::Prompt.new
+        answer = prompt.select(" ", ["Go Back"] , help: "" )
+        if answer == "Go Back"
+            login_menu(current_player)
+        end
+
+    end
+
+    def update_account(current_player)
+        system "clear"
+        a = Artii::Base.new :font => 'slant'
+        puts a.asciify("Update Account").colorize(:cyan)
+        prompt = TTY::Prompt.new
+        answer = prompt.select("\n\nWhat do you want to update?", ["Password","Email Address","Go Back"] , help: "" )
+        if answer == "Password"
+            new_password = get_password
+            current_player.update_attribute(:password, new_password)
+            puts "\n\nPassword successfully updated!"
+            sleep(1.2)
+            account_information(current_player)
+        elsif answer == "Email Address"
+            new_email = get_email
+            current_player.update_attribute(:email_address, new_email)
+            puts "\n\nEmail address successfully updated!"
+            sleep(1.2)
+            account_information(current_player)
+        else
+            account_information(current_player)
+        end
     end
 
     def play_game(game)
