@@ -8,7 +8,7 @@ require 'colorize'
 class CLI
 
     def start_app
-        # welcome_animation
+        welcome_animation
         welcome_menu
     end
 
