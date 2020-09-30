@@ -2,6 +2,9 @@ require 'artii'
 require 'colorize'
 
 def welcome_animation
+    # colossal / slant MAIN TITLE SCREEN
+    # letters 
+    # thin
     a = Artii::Base.new
     puts a.asciify("WELCOME").colorize(:magenta)
     sleep(0.5)

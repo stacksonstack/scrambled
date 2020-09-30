@@ -3,6 +3,7 @@ class Game < ActiveRecord::Base
     belongs_to :player 
 
     def self.start_game(player,word)
+        puts "Unscramble this word!\n\n"
         Game.create(player: player, word: word, status: "in progress", incorrect_guesses: 0)
     end
 
