@@ -18,6 +18,7 @@ GEM
     concurrent-ruby (1.1.7)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    highline (2.0.3)
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
@@ -84,6 +85,7 @@ DEPENDENCIES
   activerecord
   artii (~> 2.1, >= 2.1.2)
   colorize (~> 0.8.1)
+  highline
   pry
   rake
   random-word (~> 1.3)

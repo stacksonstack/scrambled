@@ -4,6 +4,7 @@ require 'pry'
 require 'tty-prompt'
 require 'artii'
 require 'colorize'
+require 'highline/import'
 
 class CLI 
 
@@ -39,11 +40,12 @@ class CLI
             login
         end
         pw_prompt = TTY::Prompt.new
-        password = pw_prompt.ask("Enter your password: ")
+        password = pw_prompt.mask("Enter your password: ")
         until Player.all.find{|player| player.username = username}.password == password
             puts "Incorrect password! Please try again!"
             pw_prompt = TTY::Prompt.new
-            password = pw_prompt.ask("Enter your password: ")
+            password = pw_prompt.mask("Enter your password: ")
+            
         end
         current_player = Player.all.find{|player| player.username = username}
         login_menu(current_player)
@@ -134,8 +136,8 @@ class CLI
     
     def get_password
         prompt = TTY::Prompt.new
-        password = prompt.ask("Enter your password: ")
-        password2 = prompt.ask("Please confirm your password: ")
+        password = prompt.mask("Enter your password: ")
+        password2 = prompt.mask("Please confirm your password: ")
         if password != password2
             puts "Your password didn't match, please try again!"
             get_password
