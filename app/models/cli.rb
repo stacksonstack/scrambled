@@ -4,12 +4,11 @@ require 'pry'
 require 'tty-prompt'
 require 'artii'
 require 'colorize'
-require 'highline/import'
 
 class CLI
 
     def start_app
-        #welcome_animation
+        # welcome_animation
         welcome_menu
     end
 
@@ -38,18 +37,22 @@ class CLI
         un_prompt = TTY::Prompt.new
         username = un_prompt.ask("\n\nEnter your username: ")
         if !Player.all.map{|player| player.username}.include?(username)
-            puts "That username doesn't exist. Please try again!"
-            sleep(1.2)
-            login
+            un_prompt = TTY::Prompt.new
+            answer = un_prompt.select("That username doesn't exist.", ["Try Again","Go Back"] , help: "" )
+            if answer == "Go Back"
+                welcome_menu
+            else
+                login
+            end
         end
         pw_prompt = TTY::Prompt.new
         password = pw_prompt.mask("Enter your password: ")
-        until Player.all.find{|player| player.username = username}.password == password
+        until Player.all.find{|player| player.username == username}.password == password
             puts "Incorrect password! Please try again!\n\n"
             pw_prompt = TTY::Prompt.new
             password = pw_prompt.mask("Enter your password: ")
         end
-        current_player = Player.all.find{|player| player.username = username}
+        current_player = Player.all.find{|player| player.username == username}
         login_menu(current_player)
     end
 
@@ -62,8 +65,10 @@ class CLI
         selection = prompt.select("\n\nChoose an option", ["Play Game","Check History","Leaderboard", "Log Out"] , help: "" )
         if selection == "Play Game"
             system "clear"
+            a = Artii::Base.new :font => 'slant'
+            puts a.asciify("Choose Your Difficulty").colorize(:cyan)
             prompt2 = TTY::Prompt.new
-            difficulty = prompt.select("Choose your difficulty", ["Easy", "Hard", "Go Back"], help: "" )
+            difficulty = prompt.select("", ["Easy", "Hard", "Go Back"], help: "" )
             if difficulty == "Easy"
                 system "clear"
                 game = Game.start_game(current_player,Word.easy_words.shuffle[0])
@@ -103,36 +108,40 @@ class CLI
 
     def play_game(game)
         scramble = game.word.scramble_word
-        puts scramble
+        a = Artii::Base.new
+        puts a.asciify("#{scramble}").colorize(:cyan)
         prompt = TTY::Prompt.new
-        guess = prompt.ask("Enter your guess: ")
-        if game.word.word != guess
+        guess = prompt.ask("\n\nUnscramble this word: ")
+        if game.word.word != guess.downcase
             puts "\n\nSorry, incorrect. Try again."
             game.incorrect_guesses += 1
             prompt = TTY::Prompt.new
-            guess = prompt.ask("Enter your guess: ")
-            if game.word.word != guess
+            guess = prompt.ask("\n\nUnscramble this word: ")
+            if game.word.word != guess.downcase
                 puts "\n\nSorry, incorrect. Try again. But here's a hint: "
                 game.incorrect_guesses += 1
                 puts game.word.hint
                 prompt = TTY::Prompt.new
-                guess = prompt.ask("Enter your guess: ")
-                if game.word.word != guess
-                    puts "\n\nSorry, you lost!"
+                guess = prompt.ask("\n\nUnscramble this word: ")
+                if game.word.word != guess.downcase
+                    puts "\n\n"
                     game.game_lost
-                    login_menu(game.player)
+                    answer = prompt.select(" ", ["Go Back"] , help: "" )
+                    if answer == "Go Back"
+                        login_menu(game.player)
+                    end
                 end
             end
         end
-        if game.word.word == guess
-            puts "\n\nCongrats! You guessed correctly!"
+        if game.word.word == guess.downcase
+            puts "\n\n"
             game.game_won
-            # binding.pry
-            login_menu(game.player)
+            answer = prompt.select(" ", ["Go Back"] , help: "" )
+            if answer == "Go Back"
+                login_menu(game.player)
+            end
         end
     end
-
-
 
     def create_account
         system "clear"
