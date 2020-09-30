@@ -132,7 +132,7 @@ class CLI
         prompt = TTY::Prompt.new
         answer = prompt.select(" ", ["Go Back"] , help: "" )
         if answer == "Go Back"
-            login_menu(current_player)
+            account_information(current_player)
         end
 
     end
