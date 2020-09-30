@@ -9,7 +9,7 @@ require 'highline/import'
 class CLI
 
     def start_app
-        welcome_animation
+        #welcome_animation
         welcome_menu
     end
 
@@ -18,7 +18,7 @@ class CLI
         system "clear"
         a = Artii::Base.new
         puts a.asciify("SCRAMBLED!").colorize(:cyan)
-        a = Artii::Base.new :font => 'thin'
+        a = Artii::Base.new :font => 'slant'
         puts a.asciify("Main Menu").colorize(:cyan)
         prompt = TTY::Prompt.new
         selection = prompt.select("Choose an option", ["Login", "Create Account", "Display Instructions"], help: "" )
@@ -33,16 +33,19 @@ class CLI
 
     def login
         system "clear"
+        a = Artii::Base.new :font => 'slant'
+        puts a.asciify("Login").colorize(:cyan)
         un_prompt = TTY::Prompt.new
-        username = un_prompt.ask("Enter your username: ")
+        username = un_prompt.ask("\n\nEnter your username: ")
         if !Player.all.map{|player| player.username}.include?(username)
             puts "That username doesn't exist. Please try again!"
+            sleep(1.2)
             login
         end
         pw_prompt = TTY::Prompt.new
         password = pw_prompt.mask("Enter your password: ")
         until Player.all.find{|player| player.username = username}.password == password
-            puts "Incorrect password! Please try again!"
+            puts "Incorrect password! Please try again!\n\n"
             pw_prompt = TTY::Prompt.new
             password = pw_prompt.mask("Enter your password: ")
         end
@@ -52,9 +55,11 @@ class CLI
 
     def login_menu(current_player)
         system "clear"
-        puts "Welcome #{current_player.username}\n\n"
+        a = Artii::Base.new :font => 'slant'
+        puts a.asciify("Welcome!").colorize(:cyan)
+        puts "Logged in as: #{current_player.username} "
         prompt = TTY::Prompt.new
-        selection = prompt.select("Choose an option", ["Play Game","Check History","Leaderboard", "Log Out"] , help: "" )
+        selection = prompt.select("\n\nChoose an option", ["Play Game","Check History","Leaderboard", "Log Out"] , help: "" )
         if selection == "Play Game"
             system "clear"
             prompt2 = TTY::Prompt.new
@@ -131,8 +136,13 @@ class CLI
 
     def create_account
         system "clear"
+        a = Artii::Base.new :font => 'slant'
+        puts a.asciify("Create An Account").colorize(:cyan)
+        "\n\n"
         username = get_username
+        puts "\n\n"
         email = get_email
+        puts "\n\n"
         password = get_password
         Player.create(username: username, email_address: email, password: password)
         welcome_menu
@@ -165,7 +175,7 @@ class CLI
         username = prompt.ask("Enter your username: ")
         usernames = Player.all.map{|player| player.username }
         if usernames.include?(username)
-            puts "Sorry that username already exists please choose another one!"
+            puts "Sorry that username already exists please choose another one!\n\n"
             get_username
         end 
         return username
@@ -173,11 +183,12 @@ class CLI
 
     def display_instructions
         system "clear"
-        puts "How to Play\n\n"
-        puts "You will be given a scrambled word where only the first letter is correct."
-        puts "You have three chances to decode the word."
-        puts "After two attempts a hint will be provided."
-        puts "Happy unscrambling!!!"
+        a = Artii::Base.new :font => 'slant'
+        puts a.asciify("How To Play").colorize(:cyan)
+        puts "\n\n- You will be given a scrambled word where only the first letter is correct.\n\n"
+        puts "- You have three chances to decode the word.\n\n"
+        puts "- After two attempts a hint will be provided.\n\n"
+        puts "- Happy unscrambling!!!\n\n"
         prompt = TTY::Prompt.new
         answer = prompt.select(" ", ["Go Back"] , help: "" )
         if answer == "Go Back"

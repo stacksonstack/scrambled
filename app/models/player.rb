@@ -7,31 +7,40 @@ class Player < ActiveRecord::Base
     end
 
     def history
-        puts "#{self.username}'s History\n\n"
+        system "clear"
+        a = Artii::Base.new :font => 'slant'
+        puts a.asciify("Game History").colorize(:cyan)
         self.games.all.each do |game|
-            puts "-word: #{game.word.word} - scramble: #{game.word.scramble_word} - outcome: #{game.status}\n\n"
+            puts "\n\n- word: #{game.word.word} \n- scramble: #{game.word.scramble_word} \n- outcome: #{game.status}"
         end
     end
 
     def self.top_ten
-
+        system "clear"
         ranking = self.all.sort_by{|player| player.wins.count}.reverse
         if ranking.length < 10
             standing = 1
-            puts "Current Leaderboard:\n\n"
+            a = Artii::Base.new :font => 'slant'
+            puts a.asciify("Current Leaderboard").colorize(:cyan)
+            puts "\n\n"
             ranking[0..ranking.length-1].each do |player|
                 puts "#{standing}. #{player.username} "
                 standing += 1
             end
         else
             standing = 1
-            puts "Current Leaderboard:\n\n"
+            a = Artii::Base.new :font => 'slant'
+            puts a.asciify("Current Leaderboard").colorize(:cyan)
+            puts "\n\n"
             ranking[0..9].each do |player|
                 puts "#{standing}. #{player.username} "
                 standing += 1
             end
         end
-        puts "\n\nDid you make it?"
+        # puts "\n\nDid you make it?"
+        puts "\n\n"
+        a = Artii::Base.new :font => 'slant'
+        puts a.asciify("Did You Make It?").colorize(:cyan)
     end
 
 end
