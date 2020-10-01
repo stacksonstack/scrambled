@@ -15,7 +15,7 @@ There are 3 primary classes for the game and one CLI class to run the game.
 
 ## NAVIGATION
 - Welcome Menu: user can create an account; user can log in; user can check game instructions
-- Login Menu: user can play a game; user can check leaderboard (top 10) stats; user can check game history; user can view account's information; user can log out
+- Login Menu: user can play a game; user can check leaderboard (top 10) stats; user can check game history (ability to delete history as well); user can view account's information; user can log out
 - Play Game Menu: user can pick difficulty (easy or hard), which starts the game
 - Account Information: user can view their information; user can update password or email address
 
