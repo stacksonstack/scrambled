@@ -15,6 +15,11 @@ class Player < ActiveRecord::Base
         end
     end
 
+    def delete_history
+        Game.destroy_by(player: self)
+        # self.games.all.destroy
+    end
+
     def self.top_ten
         system "clear"
         ranking = self.all.sort_by{|player| player.wins.count}.reverse

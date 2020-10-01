@@ -92,9 +92,31 @@ class CLI
             system "clear"
             current_player.history
             prompt = TTY::Prompt.new
-            answer = prompt.select(" ", ["Go Back"] , help: "" )
+            answer = prompt.select(" ", ["Delete History","Go Back"] , help: "" )
             if answer == "Go Back"
                 login_menu(current_player)
+            else
+                prompt = TTY::Prompt.new
+                answer = prompt.select("Are you sure?", ["Yes","No"] , help: "" )
+                if answer == "Yes"
+                    current_player.delete_history
+                    system "clear"
+                    a = Artii::Base.new :font => 'slant'
+                    puts a.asciify("Game History").colorize(:cyan)
+                    prompt = TTY::Prompt.new
+                    answer = prompt.select(" ", ["Go Back"] , help: "" )
+                    if answer == "Go Back"
+                        login_menu(current_player)
+                    end
+                else
+                    system "clear"
+                    current_player.history
+                    prompt = TTY::Prompt.new
+                    answer = prompt.select(" ", ["Go Back"] , help: "" )
+                    if answer == "Go Back"
+                        login_menu(current_player)
+                    end
+                end
             end
         elsif selection == "Account Information"
             account_information(current_player)
