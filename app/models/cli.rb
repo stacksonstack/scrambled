@@ -164,6 +164,7 @@ class CLI
         scramble = game.word.scramble_word
         a = Artii::Base.new
         puts a.asciify("#{scramble}").colorize(:cyan)
+        puts "#{scramble}"
         prompt = TTY::Prompt.new
         guess = prompt.ask("\n\nUnscramble this word: ")
         if game.word.word != guess.downcase
@@ -208,13 +209,15 @@ class CLI
         puts "\n\n"
         password = get_password
         Player.create(username: username, email_address: email, password: password)
+        puts "\n\nAccounted was created successfully!"
+        sleep(1.2)
         welcome_menu
     end
 
     def get_email
         prompt = TTY::Prompt.new
-        email = prompt.ask("Enter your email address: ")
-        email2 = prompt.ask("Please confirm your email: ")
+        email = prompt.ask("Enter your email address: ") { |q| q.validate :email , "Sorry that email is invalid, try again"}
+        email2 = prompt.ask("Please confirm your email: ") 
         if email != email2
             puts "Your email didn't match, please try again!"
             get_email
@@ -225,6 +228,11 @@ class CLI
     def get_password
         prompt = TTY::Prompt.new
         password = prompt.mask("Enter your password: ")
+        until password.length >= 7 
+            puts "Sorry, your password needs to be at least 7 characters! Try again."
+            prompt = TTY::Prompt.new
+            password = prompt.mask("Enter your password: ")
+        end
         password2 = prompt.mask("Please confirm your password: ")
         if password != password2
             puts "Your password didn't match, please try again!"
