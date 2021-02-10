@@ -31,3 +31,4 @@ There are 3 primary classes for the game and one CLI class to run the game.
 ## CREATORS
 - Stacey Carrillo
 - Billy Ott
+  - https://github.com/billyott
